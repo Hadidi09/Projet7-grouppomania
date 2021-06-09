@@ -1,0 +1,17 @@
+.listconnections {
+  position: absolute;
+  top: 270px;
+  left: 0;
+  width: 20%;
+  .toast {
+    width: 100%;
+    .toast-header {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .rounded {
+    width: 100px;
+    height: 100px;
+  }
+}
