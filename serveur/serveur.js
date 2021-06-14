@@ -48,7 +48,7 @@ io.on('connection', (socket) =>
      attributes: ["userName", "message", "id"]
         }).then(list =>
         {
-            console.log(list);
+            // console.log(list);
             socket.emit("messages", {message: JSON.stringify(list)})
         })
 
@@ -59,9 +59,9 @@ io.on('connection', (socket) =>
     socket.on("send_message", data =>
     {
         
-        console.log(
-            data.content.userName
-        );
+        // console.log(
+        //     data.content.userName
+        // );
         db.Comment.create({
             message: data.content.message,
             userName: data.content.userName,

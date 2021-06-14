@@ -41,13 +41,13 @@ exports.login = (req, res, next) =>
            }
            
            bcrypt.compare(req.body.password, resUser.password)
-              .then(valid =>
+              .then( async (valid) =>
               {
                  if (!valid)
                  {
                  return res.jon({status: 401, error: "Mot de passe incorrect !!"})
                  }
-                 res.json({
+                await res.json({
                     status: 200, id: resUser.id, token: jwt.sign({ id: resUser.id },
                     `${process.env.CLE_SECRETE}`,{ expiresIn: 1000})
                  })

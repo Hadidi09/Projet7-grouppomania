@@ -5,8 +5,11 @@ import { useHistory } from "react-router-dom"
 import axios from 'axios'
 
 
+
 const Connect = () => {
- 
+   
+
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     let history = useHistory()
@@ -64,9 +67,10 @@ const Connect = () => {
                         Submit
                     </Button>
                 </Form>
+               
             </Container>
         </div>
     );
 };
 
-export default Connect;
+export default Connect ;

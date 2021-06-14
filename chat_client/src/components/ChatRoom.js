@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router';
 import { Card, Button, Toast} from 'react-bootstrap'
 import io from 'socket.io-client'
 import Footer from '../layout/Footer';
 import NavBar from '../layout/Navbar';
+import { useHistory } from 'react-router-dom';
+import {AuthContext} from '../layout/AuthContext'
 //import logo from '../images/img/icon-above-font.png'
 
 
@@ -13,6 +15,7 @@ let socket;
 
 const ChatRoom = () =>
 {
+    const history = useHistory()
     const [message, setMessage] = useState("")
     const [messageList, setMessageList] = useState([])
 
@@ -23,8 +26,12 @@ const ChatRoom = () =>
 
     const [profil, setProfil] = useState([])
     const EndPoint = "localhost:8000/"
-
+ 
+    console.log(AuthContext);
+    
     let { id } = useParams()
+    
+       
     
     useEffect(  () =>
     {
@@ -58,14 +65,22 @@ const ChatRoom = () =>
 
     useEffect(() =>
     {
-   
+
+       
+
+    
         const userId = async () =>
         {
-         await    axios(`http://localhost:8000/api/user/profil/${id}`)
+            await axios(`http://localhost:8000/api/user/profil/${id}`, {
+                headers: {
+                 Authorization: localStorage.getItem("token")
+             }
+         })
       
                 
                  .then(response =>
                  {
+                     console.log(response);
                      console.log(response.data.message);
                      setUsername(response.data.message.username)
                      setProfil([response.data.message])
@@ -103,7 +118,7 @@ const ChatRoom = () =>
             
                 <div className="display-message">
                     {
-                        messageList.map((val) =>
+                        messageList.map((val,key) =>
                         {
                       
                             return (
@@ -158,11 +173,15 @@ const ChatRoom = () =>
                         </Toast.Header>
                     <Toast.Body>{ room }</Toast.Body>
                     </Toast>
-                </div>
-            
+            </div>
+          
+              <button onClick={() =>  history.push(`/profil/${id}`) }>go to the profil</button>
+    
+     
+              
              <Footer />
         </div>
     );
 };
 
-export default ChatRoom;
+export default ChatRoom ;

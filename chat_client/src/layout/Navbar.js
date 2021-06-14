@@ -1,8 +1,44 @@
+//import axios from 'axios';
 import React from "react";
-import { Container, Navbar, Nav,  } from "react-bootstrap";
+//import { useHistory, useParams } from 'react-router';
+import { Container, Navbar, Nav, } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import logo from '../images/img/icon-above-font.png'
 
-const NavBar = () => {
+const NavBar = () =>
+{
+  // const history = useHistory()
+  // let { id } = useParams()
+
+  // const[ user, setUser] = useState("")
+
+  // useEffect(() =>
+  // {
+
+     
+
+  
+  //   const userId = async () =>
+  //   {
+  //       await axios(`http://localhost:8000/api/user/profil/${id}`, {
+  //           headers: {
+  //            Authorization: localStorage.getItem("token")
+  //        }
+  //    })
+    
+              
+  //              .then(response =>
+  //              {
+  //                  console.log(response);
+  //                  console.log(response.data.message);
+  //                setUser(response.data.message.username)
+                 
+                  
+  //              })
+              
+  //     }
+  //    return userId()
+  // }, [id])
   return (
     <div>
       <Navbar bg="secondary" expand="lg" >
@@ -13,10 +49,13 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" >
             <Nav className="ms-auto" >
-              <Nav.Link href="#home" >Home</Nav.Link>
-              <Nav.Link href="#link">Profil</Nav.Link>
-                <Nav.Link href="#chat">Chat</Nav.Link>
-                          
+           <NavLink to="/">Home</NavLink>
+           <NavLink to="/profil/:id">Profil</NavLink>
+           <NavLink to="chatroom/:id">Chat</NavLink>
+          {/* <Nav.Link href="#home" >Home</Nav.Link>     
+          <Nav.Link href="#link">Profil</Nav.Link>
+         <Nav.Link href="#chat">Chat</Nav.Link>    
+                           */}
               
             </Nav>
           </Navbar.Collapse>

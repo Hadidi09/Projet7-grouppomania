@@ -16,6 +16,10 @@ const Navigation = () => {
                 <Link to="/connect">
                     <li>connect</li>
                 </Link>
+                <Link to="/profil">
+                    <li>profil</li>
+                </Link>
+               
                
                 
                 
