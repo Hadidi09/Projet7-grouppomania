@@ -1,4 +1,6 @@
 const db = require('../models/')
+const fs = require('fs')
+
 
 
 
@@ -16,3 +18,16 @@ exports.profils = async (req, res, next) =>
        
 }
 
+
+
+    exports.imagePost =  (req, res, next) =>  {
+      
+       
+        console.log(req.files);
+        console.log(req.body);
+   
+        res.json({message: "image upload"})
+
+ }
+
+   

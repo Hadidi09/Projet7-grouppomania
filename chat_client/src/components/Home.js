@@ -1,25 +1,25 @@
-import React, { useEffect } from "react";
-import io from "socket.io-client";
-//import {Container,Row,Col,Button,Alert,Breadcrumb,Card,Form} from "react-bootstrap";
-import NavBar from "../layout/Navbar";
-import Footer from "../layout/Footer";
-//import ChatRoom from "./ChatRoom";
+import React, { useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+import io from 'socket.io-client'
+// import {Container,Row,Col,Button,Alert,Breadcrumb,Card,Form} from "react-bootstrap";
+import NavBar from '../layout/Navbar'
+import Footer from '../layout/Footer'
+// import ChatRoom from "./ChatRoom";
 
-let socket;
+let socket
 
-const Register = () => {
-  const EndPoint = "http://localhost:8000";
+const Home = () => {
+  const EndPoint = 'http://localhost:8000'
 
   useEffect(() => {
-    socket = io(EndPoint, { transports: ["polling", "websocket"] });
+    socket = io(EndPoint, { transports: ['polling', 'websocket'] })
 
-    socket.emit("test", "I send you a Message");
-  }, [EndPoint]);
+    socket.emit('test', 'I send you a Message')
+  }, [EndPoint])
   return (
-    <div className="container_form  ">
-      
-          <NavBar />
-         
+    <div className='container_form  '>
+      <NavBar />
+
       {/* <input type="text" placeholder="FirstName..." />
       <input type="text" placeholder="LastName..." />
       <input type="email" placeholder="Email..." />
@@ -72,9 +72,9 @@ const Register = () => {
           </Card.Body>
         </Card>
           </Container> */}
-          <Footer />
+      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default withRouter(Home) 

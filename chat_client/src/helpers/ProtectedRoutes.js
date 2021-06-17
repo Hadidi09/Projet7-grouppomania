@@ -1,18 +1,32 @@
-import React from 'react';
-import {Route, Redirect } from 'react-router'
+import React from 'react'
+import { Route, Redirect } from 'react-router'
 
-
-const ProtectedRoutes = ({  isAuth , component: Component, ...rest}) => {
-    return <Route {...rest} render={(props) =>
-    {
-        if (isAuth)
+const ProtectedRoutes = ({ component: Component, ...rest }) =>
+{
+ 
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+      {
+        const verifyStorage = localStorage.getItem("token")
+        if (verifyStorage !== undefined && verifyStorage !== null)
         {
-            return <Component />
+           return <Component {...rest} {...props} />
         } else
         {
-           return <Redirect to={{ pathname: "/login", state: { from: props.location} }} />
+          localStorage.removeItem("token")
+          return (
+            <Redirect
+              to={{ pathname: '/login', state: { from: props.location } }}
+            />
+          )
         }
-    }} />
-};
+        
+        
+      }}
+    />
+  )
+}
 
 export default ProtectedRoutes;

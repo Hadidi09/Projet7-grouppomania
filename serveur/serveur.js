@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express')
 const mysql = require('mysql2')
 const cors = require('cors')
+const path = require('path')
 const db = require('./models')
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -13,12 +14,18 @@ const commentRoutes = require("./routes/comments")
 
 app.use(cors())
 
+
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
+
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
 
+
+app.use("/api/user", profilRoutes)
 app.use("/api/profil", commentRoutes)
 app.use("/api/auth", usersRoutes)
-app.use("/api/user", profilRoutes)
+
 
 db.sequelize.sync()
     .then(() =>
