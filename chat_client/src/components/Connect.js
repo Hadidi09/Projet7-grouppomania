@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 
 import { Container, Button, Form } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import {  Redirect } from 'react-router'
 import axios from 'axios'
 
 const Connect = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
+
   const login = (e) => {
     e.preventDefault()
     axios
@@ -17,7 +19,16 @@ const Connect = () => {
       })
       .then((res) => {
         console.log(res)
-        localStorage.setItem('token', res.data.token )
+        if (res.data.status === 401)
+        {
+          <Redirect
+              to={{ pathname: '/login' }}
+            />
+        } else
+        {
+           localStorage.setItem('token', res.data.token )
+        }
+        
 
         setEmail('')
         setPassword('')
@@ -26,11 +37,6 @@ const Connect = () => {
       })
   }
 
-  // const test = (e) =>
-  // {
-  //     e.preventDefault()
-  //     console.log(username, email, password);
-  // }
   return (
     <div>
       <Container>

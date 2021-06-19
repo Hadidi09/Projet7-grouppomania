@@ -66,6 +66,7 @@ const ChatRoom = () => {
   
 
     const formData = new FormData()
+    console.log(file);
     formData.append("image", file)
     const config = {
       headers: {
@@ -73,9 +74,7 @@ const ChatRoom = () => {
       }
     }
 
-    return axios.post("http://localhost:8000/api/user/images", {
-   formData, config
-    })
+    return axios.post("http://localhost:8000/api/user/uploads", formData, config)
      
       .then(res => console.log(res.data))
   }
@@ -181,7 +180,7 @@ const ChatRoom = () => {
         </Toast>
       </div>
      
-        <input type="file"   name="image"  onChange={onChangeImage} />
+        <input type="file" enctype="multipart/form-data"   name="image"  onChange={onChangeImage} />
         <button onClick={uploadImage} >upload</button>
    
       

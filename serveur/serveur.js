@@ -12,19 +12,13 @@ const usersRoutes = require("./routes/users")
 const profilRoutes = require("./routes/profils")
 const commentRoutes = require("./routes/comments")
 
+
 app.use(cors())
 
 
 
-app.use('/images', express.static(path.join(__dirname, 'images')))
-
-app.use(express.urlencoded({ extended: true}))
-app.use(express.json())
 
 
-app.use("/api/user", profilRoutes)
-app.use("/api/profil", commentRoutes)
-app.use("/api/auth", usersRoutes)
 
 
 db.sequelize.sync()
@@ -85,3 +79,11 @@ io.on('connection', (socket) =>
     })
 })
 
+app.use(express.urlencoded({ extended: true}))
+app.use(express.json())
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
+app.use("/api/user", profilRoutes)
+app.use("/api/profil", commentRoutes)
+app.use("/api/auth", usersRoutes)

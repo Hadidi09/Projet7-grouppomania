@@ -20,13 +20,26 @@ exports.profils = async (req, res, next) =>
 
 
 
-    exports.imagePost =  (req, res, next) =>  {
+exports.imagePost = async (req, res, next) =>  {
       
-       
-        console.log(req.files);
-        console.log(req.body);
+        const image = JSON.stringify(req.file)
+     await    console.log(image)
+        console.log(req.file);
+        try
+        {
+            if (req.file == undefined)
+                    {
+                        return res.json({ status: 400, message:"upload plaese file correctly"})
+                    }
+                    console.log(req.file);
+                    console.log(req.body);
    
-        res.json({message: "image upload"})
+        res.json({message: "image upload" + " " +image})
+        } catch (error)
+        {
+            res.json({ status: 500, message: `Could not upload the file: ${req.file.originalname}. ${err}` })
+        }
+        
 
  }
 
