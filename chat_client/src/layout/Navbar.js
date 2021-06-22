@@ -11,21 +11,27 @@ const NavBar = () => {
   let { id } = useParams()
   const history = useHistory()
 
-  // useEffect(() =>
-  // {
-  //   const verifyToken = localStorage.getItem(token)
-  //   if (verifyToken !== null && verifyToken !== undefined)
-  //   {
-  //     setToken(true)
-  //   } else
-  //   {
-  //     setToken(false)
-  //   }
-  // }, [token])
+  useEffect(() =>
+  {
+    if (localStorage.getItem("token"))
+    {
+     return setToken(true) 
+    } else
+    {
+   return  setToken(false)
+    }
+  }, [token])
+
+  const Logout = () =>
+  {
+    localStorage.clear()
+    history.push('/login')
+   
+  }
 
   return (
     <div>
-      {!token ? ( 
+      { !token ? ( 
       <>
         <Navbar bg='secondary' expand='lg'>
         <Container className='d-flex'>
@@ -36,15 +42,12 @@ const NavBar = () => {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
                   <Nav.Link href="/" >Home</Nav.Link>
-                  <Button variant='success'  onClick={() => history.push('/connect')}>Login</Button>
-        
-                          
+                  <Button variant='success'  onClick={() => history.push('/connect')}>Login</Button>            
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-        </>
-        
+        </>       
       ) : (
       <>
         <Navbar bg='secondary' expand='lg'>
@@ -58,14 +61,13 @@ const NavBar = () => {
                     <Nav.Link href="/" >Home</Nav.Link>
                     <Nav.Link href={`/profil/${id}`}>Profil</Nav.Link>
                     <Nav.Link href={`/chatroom/${id}`}>Chat</Nav.Link>
-                    <Button variant='danger'>Deconnexion</Button>
+                    <Button variant='danger'onClick={Logout} >Deconnexion</Button>
                 </Nav>
               </Navbar.Collapse>
           </Container>
         </Navbar>
       </>
-      ) }
-      
+      ) } 
     </div>
   )
 }

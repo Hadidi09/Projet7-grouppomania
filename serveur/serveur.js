@@ -15,12 +15,6 @@ const commentRoutes = require("./routes/comments")
 
 app.use(cors())
 
-
-
-
-
-
-
 db.sequelize.sync()
     .then(() =>
     {
@@ -52,17 +46,12 @@ io.on('connection', (socket) =>
             // console.log(list);
             socket.emit("messages", {message: JSON.stringify(list)})
         })
-
-        io.to(room).emit("newconnect", `vous avez rejoind le chat ${room}`)
+     
+        io.to(room).emit("newconnect", `vous avez rejoind le chat  ${room}`) 
     })
-
-    
     socket.on("send_message", data =>
     {
         
-        // console.log(
-        //     data.content.userName
-        // );
         db.Comment.create({
             message: data.content.message,
             userName: data.content.userName,
@@ -70,9 +59,9 @@ io.on('connection', (socket) =>
               
           },{})
         
-        socket.broadcast.emit("receive_message", data.content )
+        socket.broadcast.emit("receive_message", data.content)   
     })
-    
+
     socket.on('disconnect', () =>
     {
         console.log("User is disconnected");

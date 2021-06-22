@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) =>
             allowNull: false
         },
         
-    }, {});
+    }, {sequelize, modelName: 'comment'});
 
     Comment.associate = (models) =>
     {
         Comment.belongsTo(models.User, {
-            through: 'user_comments',
-            foreignKey: "UserId",
-            onDelete: 'cascade'
+            foreignKey: 'UserId',
+            constraints: false,
+            
        })
    }
     

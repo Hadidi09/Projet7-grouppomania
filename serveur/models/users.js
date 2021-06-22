@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) =>
 {
-
     const User = sequelize.define("User", {
         username: {
             type: DataTypes.STRING,
@@ -17,17 +16,33 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING,
             allowNull: false
         },
-        
-        
-    }, {});
+        commentableId: DataTypes.INTEGER,
+        commentableType: DataTypes.STRING
+    }, {sequelize, modelName: 'user'});
 
     User.associate = (models) =>
     {
         User.hasMany(models.Comment, {
-            foreignKey: "UserId"
-        })
-   }
-    
+            foreignKey: 'commentableId',
+            constraints: false,
+            scope: {
+                commentableType: 'user'
+            }
 
+        });
+        
+    }
+
+    User.associate = (models) =>
+    {
+        User.hasMany(models.Post, {
+            foreignKey: 'UserId',
+            constraints: false,
+            scope: {
+                commentableType: 'user'
+            }
+        });
+    }
+    
     return User;
 }

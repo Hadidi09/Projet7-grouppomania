@@ -28,8 +28,6 @@ const Connect = () => {
         {
            localStorage.setItem('token', res.data.token )
         }
-        
-
         setEmail('')
         setPassword('')
 

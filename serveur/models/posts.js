@@ -10,13 +10,27 @@ module.exports = (sequelize, DataTypes) =>
             
             } ,
         data: {
-            type: DataTypes.BLOB("long"),
+            type: DataTypes.STRING,
             
-            } 
-           
+            } ,
+        description: {
+            type: DataTypes.STRING,
+        },
         
+    },{sequelize, modelName: 'post'})
 
-    })
+   Post.associate = (models) =>
+    {
+       Post.belongsTo(models.User,{
+        foreignKey: 'UserId',
+        constraints: false,
+       })
+    }
 
     return Post;
 }
+
+// db.post.belongsTo(db.user, {
+//     as: 'username', foreignKey: 'userId})
+//  puis dans mon controller include: 'username' et dans vue.js 
+//  en écrivant {{ post.username }},

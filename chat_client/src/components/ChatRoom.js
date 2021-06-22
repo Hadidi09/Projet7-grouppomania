@@ -7,12 +7,14 @@ import io from 'socket.io-client'
 import Footer from '../layout/Footer'
 import NavBar from '../layout/Navbar'
 import { useHistory, withRouter } from 'react-router-dom'
-// import {AuthContext} from '../layout/AuthContext'
-// import logo from '../images/img/icon-above-font.png'
 
-let socket
 
-const ChatRoom = () => {
+// Ma variable socket
+let socket;
+// Mon composant ChatRoom
+const ChatRoom = () =>
+{
+  // Mes variables et mes states
   const history = useHistory()
   const [message, setMessage] = useState('')
   const [messageList, setMessageList] = useState([])
@@ -27,15 +29,13 @@ const ChatRoom = () => {
 
   const [file, setFile] = useState(null)
 
-  // console.log(AuthContext);
-
   const { id } = useParams()
-
+//Mon useEffect qui sera en charge de la connexion bidirectionnel entre le client et le serveur
   useEffect(() => {
     socket = io(EndPoint, {
       transports: ['websocket', 'polling', 'flashsocket']
     })
-    socket.emit('join', 'network')
+    socket.emit('join', {network:"network", post:"post"})
     socket.on('newconnect', (data) => {
       console.log(data)
       setRoom(data)
@@ -46,25 +46,32 @@ const ChatRoom = () => {
       console.log(receiveData)
       setMessageList(receiveData)
     })
+    // // socket.on("receive_files", (data) =>
+    // // {
+    // //   console.log(data);
+    // //   const receiveData = JSON.parse(data.message)
+    // //   console.log(receiveData)
+      
+     
+    // })
     toast.info('Welcome to the room ')
   }, [EndPoint])
-
+// Mon useEffect qui ecoute et recoit la list des messages
   useEffect(() => {
     socket.on('receive_message', (data) => {
       setMessageList([...messageList, data])
     })
   })
 
-
+// Fonction qui ecoute le changement au niveau de l'input file
   const onChangeImage = (e) =>
   {
     const image = e.target.files[0]
     setFile(image)
   }
-  const uploadImage = ( ) =>
+  // Fonction qui va envoyer l'image vers le serveur
+  const uploadImage = () =>
   {
-  
-
     const formData = new FormData()
     console.log(file);
     formData.append("image", file)
@@ -73,14 +80,11 @@ const ChatRoom = () => {
         'content-type': 'multipart/form-data'
       }
     }
-
     return axios.post("http://localhost:8000/api/user/uploads", formData, config)
-     
       .then(res => console.log(res.data))
+      
   }
-  
-  //const submitImage = (files) =
-
+  // Mon useEffect qui permet recupérer les informations de l'utlisateur
   useEffect(() => {
     const userId =  () => {
        axios(`http://localhost:8000/api/user/profil/${id}`, {
@@ -97,7 +101,7 @@ const ChatRoom = () => {
     }
     return userId()
   }, [id])
-
+// Fonction qui permet à l'utilisateur d'envoyer un message
   const sendMessage = async () => {
     const messageContent = {
       content: {
@@ -112,28 +116,25 @@ const ChatRoom = () => {
     setMessageList([...messageList, messageContent.content])
     setMessage('')
   }
-
   return (
     <div className='contenu'>
       <NavBar />
 
       <div className='container_chat'>
         <div className='display-message'>
-                  {messageList.map((val) =>
-                  {
-              //const value = val.value
-            return (
-              <div className='containermessage' key={val.id}>
-             
-                 
-                  <p >
-                    {val.userName}: {val.message}
-                  </p>
-               
-              </div>
-            )
-          })}
+          { 
+            messageList.map((val) =>
+            {
+              return (
+                <div className='containermessage' key={val.id}>
+                  <p > {val.userName} : {val.message}</p>
+                   
+                </div>
+              )        
+            })
+          }
         </div>
+       
         <div className='input-message'>
           <input
             type='text'
@@ -180,7 +181,7 @@ const ChatRoom = () => {
         </Toast>
       </div>
      
-        <input type="file" enctype="multipart/form-data"   name="image"  onChange={onChangeImage} />
+        <input type="file" encType="multipart/form-data"   name="image"  onChange={onChangeImage} />
         <button onClick={uploadImage} >upload</button>
    
       
@@ -189,7 +190,7 @@ const ChatRoom = () => {
       </button>
 
       <Footer />
-    </div>
+    </div> 
   )
 }
 

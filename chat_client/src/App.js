@@ -8,39 +8,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 // import Navigation from "./components/Navigation";
 import Login from './components/Login'
 import Home from './components/Home'
-// import Button from 'react-bootstrap/Button';
 import ChatRoom from './components/ChatRoom'
 import Connect from './components/Connect'
-
 import ProtectedRoutes from './helpers/ProtectedRoutes'
 import Profil from './components/Profil'
-//import  isAuth  from "./helpers/ProtectedRoutes" 
-
-
-// import { AuthContext } from "./layout/AuthContext";
+import Post from './components/Post'
 
 function App () {
-//   const [isAuths, setIsAuths] = useState(false)
-// console.log(isAuth);
-//   useEffect(() =>
-//   {
-//     const verify = () =>
-//     {
-        
-      
-//       if (!isAuth === null) {
-//         setIsAuths(true)
-//       } else {
-//         setIsAuths(false)
-//       }
-//     }
-//     return verify()
-   
-//   }, [ isAuths])
-// console.log(isAuth)
   return (
     <div className='App'>
-
       <Router forceRefresh>
         {/* <Navigation /> */}
 
@@ -48,14 +24,11 @@ function App () {
           <ProtectedRoutes exact path='/profil/:id' component={Profil} />
           <ProtectedRoutes path='/chatroom/:id' component={ChatRoom}  />
           <Route path='/login' component={Login} />
-          <ProtectedRoutes exact path='/' component={Home}  />
-
-         
+          <ProtectedRoutes exact path='/' component={Home} />
+          <ProtectedRoutes exact path='/post/:id' component={Post} />
             {/* <ChatRoom />
           </ProtectedRoutes> */}
-
           <Route path='/connect' component={Connect} />
-
           <Route path='/' component={() => <div>Erreur 404 not found</div>} />
         </Switch>
 

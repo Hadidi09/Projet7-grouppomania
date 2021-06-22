@@ -71,12 +71,12 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-
-          <Button className="m-1" variant='' onClick={login}>
-            Submit
-          </Button>
+          
           <Button className="m-1" variant='info' onClick={() => history.push('/connect')}>
             Login
+          </Button>
+          <Button className="m-1" variant='primary' onClick={login}>
+            Submit
           </Button>
         </Form>
       </Container>

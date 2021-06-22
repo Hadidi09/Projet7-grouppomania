@@ -22,7 +22,7 @@ exports.profils = async (req, res, next) =>
 
 exports.imagePost = async (req, res, next) =>  {
       
-        const image = JSON.stringify(req.file)
+        const image = req.file
      await    console.log(image)
         console.log(req.file);
         try
@@ -32,15 +32,35 @@ exports.imagePost = async (req, res, next) =>  {
                         return res.json({ status: 400, message:"upload plaese file correctly"})
                     }
                     console.log(req.file);
-                    console.log(req.body);
+            console.log(req.body);
+            db.Post.create({
+                type: image.mimetype,
+                name: image.originalname,
+                data:  `${req.protocol}://${req.get("host")}/uploads/${
+                    image.filename
+                    }`,
+                description: req.body.description,
+                UserId: req.body.UserId
+               
+                  
+            },{})
    
-        res.json({message: "image upload" + " " +image})
+        res.json({ status: 200, image })
         } catch (error)
         {
             res.json({ status: 500, message: `Could not upload the file: ${req.file.originalname}. ${err}` })
         }
-        
+}
+ 
 
- }
+
+exports.AllImagesPost = async (req, res, next) =>
+{
+    
+    db.Post.findAll({
+        attributes: ["type", "name", "data", "description"]
+    }).then(listImages => res.json({ status: 200, message: listImages}))
+      .catch(error => res.json({ status: 400, message: error}))
+}
 
    
