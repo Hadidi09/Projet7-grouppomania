@@ -36,9 +36,9 @@ const Login = () => {
   //     console.log(username, email, password);
   // }
   return (
-    <div>
+    <div className="container-login">
       <Navbar />
-      <Container className ="d-flex justify-content-center ">
+      <Container fluid className ="d-flex justify-content-center ">
         <Form>
           <Form.Group controlId='formBasicEmail'>
             <Form.Label>username</Form.Label>
@@ -57,9 +57,6 @@ const Login = () => {
               placeholder='Enter email'
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Form.Text className='text-muted'>
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group controlId='formBasicPassword'>
@@ -72,10 +69,10 @@ const Login = () => {
             />
           </Form.Group>
           
-          <Button className="m-1" variant='info' onClick={() => history.push('/connect')}>
+          <Button className="m-3" variant='danger' onClick={() => history.push('/connect')}>
             Login
           </Button>
-          <Button className="m-1" variant='primary' onClick={login}>
+          <Button className="m-3" variant='success' onClick={login}>
             Submit
           </Button>
         </Form>

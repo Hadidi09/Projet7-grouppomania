@@ -57,10 +57,14 @@ exports.imagePost = async (req, res, next) =>  {
 exports.AllImagesPost = async (req, res, next) =>
 {
     
-    db.Post.findAll({
-        attributes: ["type", "name", "data", "description"]
-    }).then(listImages => res.json({ status: 200, message: listImages}))
-      .catch(error => res.json({ status: 400, message: error}))
+    const postUser= await db.Post.findAll({
+      
+        //attributes: ["type", "name", "data", "description", "username"],
+        include: db.User
+    })
+
+    console.log(JSON.stringify(postUser, null, 2));
+    res.json({ status: 200, message: postUser})
 }
 
    

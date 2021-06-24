@@ -30,7 +30,3 @@ module.exports = (sequelize, DataTypes) =>
     return Post;
 }
 
-// db.post.belongsTo(db.user, {
-//     as: 'username', foreignKey: 'userId})
-//  puis dans mon controller include: 'username' et dans vue.js 
-//  en écrivant {{ post.username }},

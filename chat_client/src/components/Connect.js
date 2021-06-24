@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 
 import { Container, Button, Form } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
-import {  Redirect } from 'react-router'
+import { Redirect } from 'react-router'
+import NavBar from '../layout/Navbar'
+import Footer from '../layout/Footer'
 import axios from 'axios'
 
 const Connect = () => {
@@ -36,8 +38,9 @@ const Connect = () => {
   }
 
   return (
-    <div>
-      <Container>
+    <div className="container-connect">
+      <NavBar/>
+      <Container fluid className ="d-flex justify-content-center">
         <Form>
           <Form.Group controlId='formBasicEmail'>
             <Form.Label>Email address</Form.Label>
@@ -47,9 +50,6 @@ const Connect = () => {
               placeholder='Enter email'
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Form.Text className='text-muted'>
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group controlId='formBasicPassword'>
@@ -62,11 +62,12 @@ const Connect = () => {
             />
           </Form.Group>
 
-          <Button className="my-2" variant='primary' onClick={login}>
+          <Button className="my-4" variant='success' onClick={login}>
             Submit
           </Button>
         </Form>
       </Container>
+      <Footer />
     </div>
   )
 }

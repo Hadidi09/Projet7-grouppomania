@@ -40,14 +40,14 @@ io.on('connection', (socket) =>
         console.log(room);
 
         db.Comment.findAll({
-     attributes: ["userName", "message", "id"]
+     attributes: ["userName", "message", "id", "createdAt"]
         }).then(list =>
         {
             // console.log(list);
             socket.emit("messages", {message: JSON.stringify(list)})
         })
      
-        io.to(room).emit("newconnect", `vous avez rejoind le chat  ${room}`) 
+        io.to(room).emit("newconnect", `vous avez rejoint le chat  ${room}`) 
     })
     socket.on("send_message", data =>
     {

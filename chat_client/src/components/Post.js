@@ -5,18 +5,20 @@ import { useParams } from 'react-router'
 import { Form, Button} from 'react-bootstrap'
 import Footer from '../layout/Footer'
 import NavBar from '../layout/Navbar'
-import { withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 
 
 
 const Post = () =>
 {
-    const [userName, setUserName] = useState("")
+    
     const [description, setDescription] = useState("")
     const [postList, setPostList] = useState([])
     const [UserId, setUserId] = useState([])
     const [file, setFile] = useState(null)
     const { id } = useParams()
+    //const [refresh, setRefresh] = useState("")
+    const history = useHistory()
 
     useEffect(() => {
         const userId =  () => {
@@ -26,7 +28,6 @@ const Post = () =>
             }
           }).then((response) => {
               console.log(response)
-              setUserName(response.data.message.username)
               setUserId(response.data.message.id)
           })
         }
@@ -42,12 +43,14 @@ const Post = () =>
                 }
             }).then(response =>
             {
-                console.log(response.data.message);
+                console.log(response);
+                // const res = JSON.parse(response)
+                // console.log(res);
                 const AllPost = response.data.message
                 console.log(AllPost);
-                console.log(AllPost.data);
+               // console.log(AllPost.data);
                  setPostList(AllPost)
-                // console.log(postList);
+                 //console.log(postList);
             })
         }
         
@@ -76,15 +79,18 @@ const Post = () =>
         'content-type': 'multipart/form-data'
       }
     }
-    return axios.post("http://localhost:8000/api/user/uploads", formData, config)
+      return axios.post("http://localhost:8000/api/user/uploads", formData, config)
      
       
-        .then(res =>
-        {
+          .then(res =>
+          {
               console.log(res);
-          })
-          
-      
+            //   const data = [file, description, UserId]
+            //   setPostList([...postList, data])
+            //   console.log(postList);
+            history.push(`/post/${id}`)
+          });
+             
   }
     return (
         <div className="container">
@@ -98,7 +104,7 @@ const Post = () =>
                         console.log(val);
                         return (
                             <div className="containerimages" key={val.id}>
-                            <p>{userName} : <img src={val.data} alt="images" /></p> 
+                            <p>{val.User.username} : <img src={val.data} alt="images" /></p> 
                         </div>
                         )
                     })
@@ -108,7 +114,7 @@ const Post = () =>
                 </div>
                
             </div>
-            <Form className="d-flex justify-content-center align-items-center flex-column" encType="multipart/form-data" onSubmit={uploadImage} >
+            <Form  className="d-flex justify-content-center align-items-center flex-column" encType="multipart/form-data" onSubmit={uploadImage} >
                     <Form.Group>
                         <Form.File type="file" name="image" id="exampleFormControlFile1" onChange={onChangeImage} />
                     </Form.Group>

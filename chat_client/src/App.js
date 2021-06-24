@@ -21,9 +21,9 @@ function App () {
         {/* <Navigation /> */}
 
         <Switch>
+           <Route path='/login' component={Login} />
           <ProtectedRoutes exact path='/profil/:id' component={Profil} />
           <ProtectedRoutes path='/chatroom/:id' component={ChatRoom}  />
-          <Route path='/login' component={Login} />
           <ProtectedRoutes exact path='/' component={Home} />
           <ProtectedRoutes exact path='/post/:id' component={Post} />
             {/* <ChatRoom />

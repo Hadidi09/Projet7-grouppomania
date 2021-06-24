@@ -13,15 +13,15 @@ const ProtectedRoutes = ({ component: Component, ...rest }) =>
         if (verifyStorage !== undefined && verifyStorage !== null)
         {
            return <Component {...rest} {...props} />
-        } else
-        {
+        } 
+        
           localStorage.removeItem("token")
           return (
             <Redirect
               to={{ pathname: '/login', state: { from: props.location } }}
             />
           )
-        }
+        
         
         
       }}

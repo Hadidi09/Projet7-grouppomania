@@ -1,13 +1,15 @@
 .listconnections {
-  position: absolute;
-  top: 270px;
-  left: 0;
-  width: 20%;
   .toast {
     width: 100%;
+    background-color: #011f4b;
+    color: #fff;
     .toast-header {
       display: flex;
       flex-direction: column;
+    }
+    .toast-body {
+      display: flex;
+      justify-content: center;
     }
   }
   .rounded {

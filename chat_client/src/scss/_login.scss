@@ -1,0 +1,16 @@
+.container-login {
+  background-color: #011f4b;
+
+  .form-control {
+    background-color: rgb(211, 205, 197);
+    color: #011f4b;
+    &:focus {
+      background-color: #fff;
+      color: #011f4b;
+    }
+  }
+
+  label {
+    color: #fff;
+  }
+}
