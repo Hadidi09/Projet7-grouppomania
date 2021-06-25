@@ -1,43 +1,48 @@
 import React, { useState } from "react";
 import { Container, Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router";
-import NavBar from "../layout/Navbar";
-import Footer from "../layout/Footer";
 import axios from "axios";
+import Navbar from "../layout/Navbar";
+import Footer from "../layout/Footer";
 
-//Mon component qui gère la logique pour permettre à l'utilisateur de se connecter à son compte.
-const Connect = () => {
+const Signup = () => {
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  // Fonction qui permet d'envoyer au serveur les informations de l'utilisateur pour l'authentification.
   const login = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/auth/login", {
+      .post("http://localhost:8000/api/auth/signup", {
+        username: username,
         email: email,
         password: password,
       })
-      .then((res) => {
-        console.log(res);
-        if (res.data.status === 401) {
-          <Redirect to={{ pathname: "/login" }} />;
-        } else {
-          localStorage.setItem("token", res.data.token);
-        }
+      .then((data) => {
+        console.log(data);
+
+        setUserName("");
         setEmail("");
         setPassword("");
 
-        history.push(`/chatroom/${res.data.id}`);
+        history.push("/connect");
       });
   };
 
   return (
-    <div className="container-connect">
-      <NavBar />
-      <Container fluid className="d-flex justify-content-center">
+    <div className="container-login">
+      <Navbar />
+      <Container fluid className="d-flex justify-content-center ">
         <Form>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>username</Form.Label>
+            <Form.Control
+              type="text"
+              value={username}
+              placeholder="Enter username"
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -58,7 +63,14 @@ const Connect = () => {
             />
           </Form.Group>
 
-          <Button className="my-4" variant="success" onClick={login}>
+          <Button
+            className="m-3"
+            variant="danger"
+            onClick={() => history.push("/connect")}
+          >
+            Login
+          </Button>
+          <Button className="m-3" variant="success" onClick={login}>
             Submit
           </Button>
         </Form>
@@ -68,4 +80,4 @@ const Connect = () => {
   );
 };
 
-export default Connect;
+export default Signup;

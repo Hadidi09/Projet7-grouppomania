@@ -13,6 +13,7 @@
     flex: 80%;
     width: 100%;
     overflow-y: scroll;
+    height: 60vh;
   }
   .input-message {
     flex: 20%;
@@ -40,11 +41,12 @@
     }
     .para {
       display: flex;
-      background-color: #7f7373;
+      background-color: #7f7373a2;
       color: #fff;
-      border: 2px solid #7f7373;
+      border: 2px solid #7f7373a2;
       border-radius: 15px;
       margin: 8px;
+      line-break: auto;
     }
     .span-username {
       color: #fff;
@@ -64,14 +66,13 @@
     .small-date {
       small {
         color: #fff;
-        display: none;
       }
-      &:hover {
-        small {
-          color: #fff;
-          display: inline-flex;
-        }
-      }
+      // &:hover {
+      //   small {
+      //     color: #fff;
+      //     display: inline-flex;
+      //   }
+      // }
     }
   }
 }

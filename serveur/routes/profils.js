@@ -1,16 +1,20 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const profilControllers = require("../controllers/profils")
+const profilControllers = require("../controllers/profils");
 
-const auth = require('../middlewares/jsonwebtoken')
-const upload = require('../middlewares/multer-config')
-// console.log(upload);
-
-
-router.post("/uploads" , upload.single('image'),  profilControllers.imagePost )
-router.get("/profil/:id", auth, profilControllers.profils)
-router.get("/", profilControllers.AllImagesPost)
+const auth = require("../middlewares/jsonwebtoken");
+const upload = require("../middlewares/multer-config");
 
 
-module.exports = router;  
+router.post(
+  "/uploads",
+  auth,
+  upload.single("image"),
+  profilControllers.imagePost
+);
+router.get("/profil/:id", auth, profilControllers.profils);
+router.get("/", auth, profilControllers.AllImagesPost);
+router.delete("/profil/:id", auth, profilControllers.deleteUser);
+
+module.exports = router;
