@@ -8,6 +8,7 @@ import Footer from "../layout/Footer";
 import NavBar from "../layout/Navbar";
 import { useHistory, withRouter } from "react-router-dom";
 
+
 // Ma variable socket
 let socket;
 // Mon composant ChatRoom
@@ -25,8 +26,7 @@ const ChatRoom = () => {
   const [profil, setProfil] = useState([]);
   const EndPoint = "localhost:8000/";
 
-  //const [file, setFile] = useState(null)
-
+ 
   const { id } = useParams();
   //Mon useEffect qui sera en charge de la connexion bidirectionnel entre le client et le serveur
   useEffect(() => {
@@ -152,7 +152,7 @@ const ChatRoom = () => {
                           Some quick example text to build on the card title and
                           make up the bulk of the card's content.
                         </Card.Text>
-                        <Button variant="primary">Profil</Button>
+                        <Button variant="primary" onClick={() => history.push(`/profil/${id}`)}>Profil</Button>
                       </Card.Body>
                     </Card>
                   </div>
@@ -162,10 +162,6 @@ const ChatRoom = () => {
           </Col>
         </Row>
       </Container>
-
-      <button onClick={() => history.push(`/profil/${id}`)}>
-        go to the profil
-      </button>
 
       <Footer />
     </div>

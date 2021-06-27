@@ -4,23 +4,34 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
+//import { useForm } from "react-hook-form"
+
 
 const Signup = () => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+ // const { register } = useForm()
+  
   const history = useHistory();
+
   const login = (e) => {
     e.preventDefault();
+
+    //checkRegex()
     axios
       .post("http://localhost:8000/api/auth/signup", {
         username: username,
         email: email,
         password: password,
       })
-      .then((data) => {
-        console.log(data);
-
+      .then((data) =>
+      {
+        
+        console.log(data.data);
+        
+        
         setUserName("");
         setEmail("");
         setPassword("");
@@ -48,11 +59,17 @@ const Signup = () => {
             <Form.Control
               type="email"
               value={email}
+              name="email"
+             
+              
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
+              
+              required
             />
+         
           </Form.Group>
-
+         
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -60,8 +77,14 @@ const Signup = () => {
               value={password}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
+            
+            
           </Form.Group>
+          
+
+         
 
           <Button
             className="m-3"
@@ -74,7 +97,9 @@ const Signup = () => {
             Submit
           </Button>
         </Form>
+        
       </Container>
+      
       <Footer />
     </div>
   );
