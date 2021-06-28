@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
-//import { useForm } from "react-hook-form"
+
 
 
 const Signup = () => {
@@ -12,39 +12,52 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
- // const { register } = useForm()
-  
+ 
   const history = useHistory();
 
+
   const login = (e) => {
-    e.preventDefault();
+     e.preventDefault();
+    let regEmail = new RegExp('^[a-z0-9_-]+@[a-z]+.[a-z]{2,3}$')
+    let regPassword = new RegExp('^(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$')
+    
+    if (!regEmail.test(email))
+    {
+      return alert("please enter email valid")
+    }
+    if (!regPassword.test(password))
+    {
+      return alert("Votre Mot de Passe doit contenir au moins 1 chiffre, 1 majuscule, 1 lettre minuscule, min:8 caractères, max: 20 caractères")
+    }
+    else
+    {
+      axios
+    .post("http://localhost:8000/api/auth/signup", {
+      username: username,
+      email: email,
+      password: password,
+    })
+    .then((data) => {
+      console.log(data);
 
-    //checkRegex()
-    axios
-      .post("http://localhost:8000/api/auth/signup", {
-        username: username,
-        email: email,
-        password: password,
-      })
-      .then((data) =>
-      {
-        
-        console.log(data.data);
-        
-        
-        setUserName("");
-        setEmail("");
-        setPassword("");
+      setUserName("");
+      setEmail("");
+      setPassword("");
 
-        history.push("/connect");
-      });
+      history.push("/connect");
+    });
+    }
+    
+    
   };
 
+ 
   return (
     <div className="container-login">
       <Navbar />
       <Container fluid className="d-flex justify-content-center ">
-        <Form>
+      
+      <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>username</Form.Label>
             <Form.Control
@@ -59,17 +72,11 @@ const Signup = () => {
             <Form.Control
               type="email"
               value={email}
-              name="email"
-             
-              
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
-              
-              required
             />
-         
           </Form.Group>
-         
+
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -77,14 +84,8 @@ const Signup = () => {
               value={password}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
-            
-            
           </Form.Group>
-          
-
-         
 
           <Button
             className="m-3"
@@ -97,7 +98,6 @@ const Signup = () => {
             Submit
           </Button>
         </Form>
-        
       </Container>
       
       <Footer />

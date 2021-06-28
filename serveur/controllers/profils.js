@@ -1,6 +1,7 @@
 const db = require("../models/");
-const fs = require("fs");
 
+
+//trouver un utilisateur
 exports.profils = async (req, res, next) => {
   const id = req.params.id;
   await db.User.findOne({
@@ -13,7 +14,7 @@ exports.profils = async (req, res, next) => {
       res.json({ status: 400, message: "bad request" + error })
     );
 };
-
+// stocker une image dans la base de données
 exports.imagePost = async (req, res, next) => {
   const image = req.file;
   await console.log(image);
@@ -43,7 +44,7 @@ exports.imagePost = async (req, res, next) => {
     });
   }
 };
-
+// recupérer toutes les images dans la base de données
 exports.AllImagesPost = async (req, res, next) => {
   const postUser = await db.Post.findAll({
     include: db.User,
@@ -52,7 +53,7 @@ exports.AllImagesPost = async (req, res, next) => {
   
   res.json({ status: 200, message: postUser });
 };
-
+// supprimer un profil user
 exports.deleteUser = async (req, res, next) => {
   try {
     const userDestroy = req.params.id;
@@ -65,4 +66,17 @@ exports.deleteUser = async (req, res, next) => {
   } catch (error) {
     res.json({ status: 500, message: "impossible to destroy user" });
   }
+};
+
+//Ajouter un message sur le mur de la page
+exports.commentaire = (req, res, next) => {
+  const comment = req.body.comment;
+  return db.Comment.create(
+    {
+      text: comment,
+    },
+    { fields: ["text"] }
+  )
+    .then((comment) => res.json({ status: 201, message: comment }))
+    .catch((error) => res.json({ status: 400, message: error }));
 };

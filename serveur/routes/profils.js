@@ -13,6 +13,7 @@ router.post(
   upload.single("image"),
   profilControllers.imagePost
 );
+router.post("/comments", auth, profilControllers.commentaire);
 router.get("/profil/:id", auth, profilControllers.profils);
 router.get("/", auth, profilControllers.AllImagesPost);
 router.delete("/profil/:id", auth, profilControllers.deleteUser);

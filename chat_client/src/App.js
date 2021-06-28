@@ -12,6 +12,7 @@ import ProtectedRoutes from "./helpers/ProtectedRoutes";
 import Profil from "./components/Profil";
 import Post from "./components/Post";
 
+
 function App() {
   return (
     <div className="App">
