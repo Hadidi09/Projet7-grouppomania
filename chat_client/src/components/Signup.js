@@ -11,7 +11,7 @@ const Signup = () => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [ role, setRole] = useState(false)
  
   const history = useHistory();
 
@@ -27,7 +27,7 @@ const Signup = () => {
     }
     if (!regPassword.test(password))
     {
-      return alert("Votre Mot de Passe doit contenir au moins 1 chiffre, 1 majuscule, 1 lettre minuscule, min:8 caractères, max: 20 caractères")
+      return alert("Votre Mot de Passe doit contenir au moins 1 majuscule, 1 lettre minuscule, 1 caractère spécial, min:8 caractères, max: 20 caractères")
     }
     else
     {
@@ -36,6 +36,7 @@ const Signup = () => {
       username: username,
       email: email,
       password: password,
+      role: role,
     })
     .then((data) => {
       console.log(data);
@@ -43,7 +44,7 @@ const Signup = () => {
       setUserName("");
       setEmail("");
       setPassword("");
-
+      setRole(false)
       history.push("/connect");
     });
     }
@@ -65,6 +66,7 @@ const Signup = () => {
               value={username}
               placeholder="Enter username"
               onChange={(e) => setUserName(e.target.value)}
+              
             />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
@@ -74,6 +76,7 @@ const Signup = () => {
               value={email}
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
+              
             />
           </Form.Group>
 
@@ -84,6 +87,7 @@ const Signup = () => {
               value={password}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+             
             />
           </Form.Group>
 

@@ -80,3 +80,66 @@ exports.commentaire = (req, res, next) => {
     .then((comment) => res.json({ status: 201, message: comment }))
     .catch((error) => res.json({ status: 400, message: error }));
 };
+
+// recupérer un commentaire 
+
+exports.OneComment = async (req, res, next) =>
+{
+  const commentUser = await db.Comment.findOne({
+    include: db.User
+  })
+  res.json({ status: 200, message: commentUser})
+}
+// modifier un commentaire
+
+exports.UpdateComment = async (req, res, next) =>
+{
+  const id = req.body.id
+  await db.Comment.update(
+    {
+      username: req.body.username,
+      message: req.body.message,
+      id: req.body.id
+    }, {
+       where: {id : id}
+    }
+      
+  
+   
+  ).then(result => res.json({ status: 200, message: result }))
+  .catch(err => res.json({status: 400, message: err}))
+  
+}
+// récupérer tous users 
+
+exports.AllUsers = async (req, res, next) =>
+{
+  const users = await db.User.findAll({
+    
+  })
+
+  res.json({status: 200, message: users})
+}
+
+// Modifier un post 
+
+exports.findPost = async (req, res, next) =>
+{
+  const postUser = await db.Post.findOne({
+    include: db.User,
+  });
+
+  
+  res.json({ status: 200, message: postUser });
+}
+
+exports.UpdatePost = async (req, res, next) =>
+{
+  const postUser = await db.Post.update({
+    include: db.User,
+  });
+
+  
+  res.json({ status: 200, message: postUser });
+}
+

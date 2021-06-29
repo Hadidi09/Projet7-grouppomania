@@ -98,3 +98,16 @@
     height: 70px;
   }
 }
+
+.display-message-edit {
+  background-color: #011f4b;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .containermessage-edit {
+    border: 2px solid #fff;
+    border-radius: 15px;
+    padding: 10%;
+  }
+}

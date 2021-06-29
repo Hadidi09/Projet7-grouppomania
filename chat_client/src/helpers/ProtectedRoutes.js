@@ -7,8 +7,15 @@ const ProtectedRoutes = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) => {
         const verifyStorage = localStorage.getItem("token");
-        if (verifyStorage !== undefined && verifyStorage !== null) {
-          return <Component {...rest} {...props} />;
+        
+        if (verifyStorage !== undefined && verifyStorage !== null)
+        {
+        
+          
+            return <Component {...rest} {...props} />;
+          
+            
+          
         }
 
         localStorage.removeItem("token");

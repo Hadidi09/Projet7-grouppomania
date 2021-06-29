@@ -29,13 +29,13 @@ const NavBar = () => {
         <>
           <Navbar bg="secondary" expand="lg">
             <Container className="d-flex">
-              <Navbar.Brand href="#home">
-                <img src={logo} alt="logo" width="85" height="85" />
+              <Navbar.Brand href={`/`}>
+                <img src={logo} alt="Groupomania logo" width="85" height="85" />
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">
-                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/login">Home</Nav.Link>
                   <Button
                     variant="success"
                     onClick={() => history.push("/connect")}
@@ -51,8 +51,8 @@ const NavBar = () => {
         <>
           <Navbar bg="secondary" expand="lg">
             <Container className="d-flex">
-              <Navbar.Brand href="#home">
-                <img src={logo} alt="logo" width="85" height="85" />
+              <Navbar.Brand href={`/`}>
+                <img src={logo} alt="Groupomania logo" width="85" height="85" />
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">

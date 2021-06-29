@@ -25,6 +25,7 @@ const Connect = () => {
           <Redirect to={{ pathname: "/login" }} />;
         } else {
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("isAdmin", res.data.role)
         }
         setEmail("");
         setPassword("");

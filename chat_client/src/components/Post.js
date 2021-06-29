@@ -22,6 +22,7 @@ const Post = () => {
   const [file, setFile] = useState(null);
   const { id } = useParams();
   //const [refresh, setRefresh] = useState("")
+  const [ message, setMessage] = useState([])
   const history = useHistory();
 
   useEffect(() => {
@@ -46,13 +47,12 @@ const Post = () => {
         },
       }).then((response) => {
         console.log(response);
-        // const res = JSON.parse(response)
-        // console.log(res);
+        
         const AllPost = response.data.message;
         console.log(AllPost);
-        // console.log(AllPost.data);
+       
         setPostList(AllPost);
-        //console.log(postList);
+       
       });
     };
 
@@ -83,12 +83,11 @@ const Post = () => {
 
       .then((res) => {
         console.log(res);
-        //   const data = [file, description, UserId]
-        //   setPostList([...postList, data])
-        //   console.log(postList);
+       
         history.push(`/post/${id}`);
       });
   };
+
   return (
     <div className="container">
       <NavBar />
@@ -122,37 +121,33 @@ const Post = () => {
                       <Card.Img variant="top" src={val.data} alt="images" />
                       <Card.Body>
                         <Card.Title>{val.User.username}</Card.Title>
-                        <Card.Text>
-                          Some quick example text to build on the card title and
-                          make up the bulk of the card's content.
-                        </Card.Text>
                       </Card.Body>
                     </Card>
+                    <button>click{ }</button>
                   </div>
+                  
                 );
               })}
+              {
+                  
+                }
             </div>
           </Col>
-          {/* <Col xs={12}  md={3}>
-            <div className='profil'>
-              {profil.map((val, index) => {
-                return (
-                  <div className="card-user" key={index}>
-                    <Card >
-                      <Card.Body>
-                        <Card.Title>{val.username}</Card.Title>
-                        <Card.Text>
-                          Some quick example text to build on the card title and make
-                          up the bulk of the card's content.
-                        </Card.Text>
-                        <Button variant='primary'>Profil</Button>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                )
-              })}
+          <Col xs={12}  md={3}>
+            
+            <div className="input-message">
+              <input
+                type="text"
+                value={message}
+                placeholder="message..."
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+              <button onClick={"rien"}>Envoyer</button>
             </div>
-          </Col> */}
+            
+          </Col>
         </Row>
       </Container>
       <Form

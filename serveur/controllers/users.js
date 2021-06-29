@@ -13,6 +13,7 @@ exports.signup = (req, res, next) =>
         username: req.body.username,
         email: req.body.email,
         password: hash,
+        role: req.body.role
       })
 
         .then(() => res.json({ status: 201, message: "Utilisateur crée !!" }))
@@ -43,7 +44,9 @@ exports.login = (req, res, next) => {
           await res.json({
             status: 200,
             id: resUser.id,
-            token: jwt.sign({ id: resUser.id }, `${process.env.CLE_SECRETE}`, {
+            role: resUser.role,
+           
+            token: jwt.sign({ id: resUser.id, role: resUser.role}, `${process.env.CLE_SECRETE}`, {
               expiresIn: 1000,
             }),
           });
