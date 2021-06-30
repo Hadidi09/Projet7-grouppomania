@@ -12,6 +12,7 @@ import ProtectedRoutes from "./helpers/ProtectedRoutes";
 import Profil from "./components/Profil";
 import Post from "./components/Post";
 import Admin from "./components/Admin";
+import PostId from "./components/PostId";
 
 
 function App() {
@@ -24,7 +25,9 @@ function App() {
           <ProtectedRoutes path="/chatroom/:id" component={ChatRoom} />
           <ProtectedRoutes exact path="/" component={Home} />
           <ProtectedRoutes exact path="/post/:id" component={Post} />
-          <ProtectedRoutes exact path="/admin/:id" component={Admin}  />
+          <ProtectedRoutes exact path="/post/user/:id" component={PostId} />
+          <ProtectedRoutes exact path="/admin/:id" component={Admin} />
+          
 
           <Route path="/connect" component={Connect} />
           <Route path="/" component={() => <div>Erreur 404 not found</div>} />

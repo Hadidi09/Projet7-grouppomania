@@ -27,6 +27,7 @@ exports.imagePost = async (req, res, next) => {
     console.log(req.body);
     db.Post.create(
       {
+        userName: req.body.userName,
         type: image.mimetype,
         name: image.originalname,
         data: `${req.protocol}://${req.get("host")}/uploads/${image.filename}`,
@@ -99,7 +100,7 @@ exports.UpdateComment = async (req, res, next) =>
     {
       username: req.body.username,
       message: req.body.message,
-      id: req.body.id
+      id: req.params.id
     }, {
        where: {id : id}
     }
@@ -125,14 +126,14 @@ exports.AllUsers = async (req, res, next) =>
 
 exports.findPost = async (req, res, next) =>
 {
-  const postUser = await db.Post.findOne({
-    include: db.User,
-  });
+  const id = req.params.id
+  const postUser = await db.Post.findByPk(
+    id);
 
   
   res.json({ status: 200, message: postUser });
 }
-
+//
 exports.UpdatePost = async (req, res, next) =>
 {
   const postUser = await db.Post.update({
@@ -143,3 +144,42 @@ exports.UpdatePost = async (req, res, next) =>
   res.json({ status: 200, message: postUser });
 }
 
+
+// Commentaire post
+
+exports.PostComment = async (req, res, next) =>
+{
+  return await db.CommentPost.create(
+    {
+      userName: req.body.userName,
+      message: req.body.message,
+      PostId: req.body.PostId
+     
+    },
+    {}
+  )
+  .then((comment) => res.json({ status: 201, message: comment }))
+  .catch((error) => res.json({ status: 400, message: error }));
+}
+
+// récupérer tous les commentaires
+
+exports.AllCommentsPost = async (req, res, next) =>
+{
+  const id = req.params.id
+  const allComment = await db.CommentPost.findAll({
+          where :{PostId : id}
+  })
+  res.json({status: 200, message:allComment})
+}
+//trouver un user
+// exports.findUser = async (req, res, next) =>
+// {
+//   const id = req.params.id
+//   const user = await db.user.findByPk(
+//     id);
+
+  
+//   res.json({ status: 200, message: user });
+// }
+//

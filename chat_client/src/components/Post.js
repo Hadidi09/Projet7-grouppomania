@@ -19,6 +19,7 @@ const Post = () => {
   const [description, setDescription] = useState("");
   const [postList, setPostList] = useState([]);
   const [UserId, setUserId] = useState([]);
+  const [ userName, setUserName] = useState("")
   const [file, setFile] = useState(null);
   const { id } = useParams();
   //const [refresh, setRefresh] = useState("")
@@ -34,6 +35,8 @@ const Post = () => {
       }).then((response) => {
         console.log(response);
         setUserId(response.data.message.id);
+        setUserName(response.data.message.username)
+        localStorage.setItem("username", response.data.message.username)
       });
     };
     return userId();
@@ -72,6 +75,7 @@ const Post = () => {
     formData.append("image", file);
     formData.append("description", description);
     formData.append("UserId", UserId);
+    formData.append("userName", userName);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -123,7 +127,7 @@ const Post = () => {
                         <Card.Title>{val.User.username}</Card.Title>
                       </Card.Body>
                     </Card>
-                    <button>click{ }</button>
+                    <button onClick={() => { history.push(`/post/user/${val.id}`) }}>click</button>
                   </div>
                   
                 );
@@ -144,7 +148,7 @@ const Post = () => {
                   setMessage(e.target.value);
                 }}
               />
-              <button onClick={"rien"}>Envoyer</button>
+              <button>Envoyer</button>
             </div>
             
           </Col>

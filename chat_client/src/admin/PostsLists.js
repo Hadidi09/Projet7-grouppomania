@@ -28,7 +28,7 @@ const PostsLists = () =>
       }, []);
     return (
         <div>
-           <Table striped bordered hover variant="dark">
+           <Table striped bordered hover variant="dark" className="tableau">
                 <thead>
                     <tr>
                     <th>#</th>

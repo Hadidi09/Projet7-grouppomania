@@ -6,7 +6,7 @@ import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 import UsersLists from '../admin/UsersLists';
 import PostsLists from '../admin/PostsLists';
-import EditPost from '../admin/EditPost';
+//import EditPost from '../admin/EditPost';
 
 const Admin = (props) =>
 {
@@ -42,8 +42,8 @@ const Admin = (props) =>
                     : (<>
                         <h1>Administrateur</h1>
                         <UsersLists />
-                <PostsLists />
-                <EditPost />
+                        <PostsLists />
+                
                        </> 
                     )
                
