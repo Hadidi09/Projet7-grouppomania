@@ -23,7 +23,7 @@ const Post = () => {
   const [file, setFile] = useState(null);
   const { id } = useParams();
   //const [refresh, setRefresh] = useState("")
-  const [ message, setMessage] = useState([])
+  //const [ message, setMessage] = useState([])
   const history = useHistory();
 
   useEffect(() => {
@@ -127,7 +127,7 @@ const Post = () => {
                         <Card.Title>{val.User.username}</Card.Title>
                       </Card.Body>
                     </Card>
-                    <button onClick={() => { history.push(`/post/user/${val.id}`) }}>click</button>
+                    <button className="voir_post" onClick={() => { history.push(`/post/user/${val.id}`) }}>Voir Le post</button>
                   </div>
                   
                 );
@@ -137,21 +137,7 @@ const Post = () => {
                 }
             </div>
           </Col>
-          <Col xs={12}  md={3}>
-            
-            <div className="input-message">
-              <input
-                type="text"
-                value={message}
-                placeholder="message..."
-                onChange={(e) => {
-                  setMessage(e.target.value);
-                }}
-              />
-              <button>Envoyer</button>
-            </div>
-            
-          </Col>
+         
         </Row>
       </Container>
       <Form

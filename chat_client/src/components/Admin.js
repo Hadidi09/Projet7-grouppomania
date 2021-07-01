@@ -29,6 +29,7 @@ const Admin = (props) =>
         return userId();
       }, [id]);
 
+     
     return (
         <div>
             <Navbar />
@@ -37,12 +38,22 @@ const Admin = (props) =>
             {
                 !verifyAdmin ?
                     (
-                        <> { history.push("/")} </>
+                        <> { history.goBack()} </>
                     )
-                    : (<>
-                        <h1>Administrateur</h1>
-                        <UsersLists />
-                        <PostsLists />
+              : (<>
+                <div className="d-flex justify-content-center">
+                   <h1>Administrateur</h1>
+                </div>
+                
+                <div>
+                  <h2>Users</h2>
+                  <UsersLists />
+                </div>
+                <div>
+                  <h2>Les Posts</h2>
+                   <PostsLists />
+                </div>
+                       
                 
                        </> 
                     )

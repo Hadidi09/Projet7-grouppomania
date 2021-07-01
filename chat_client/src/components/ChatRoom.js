@@ -26,7 +26,7 @@ const ChatRoom = () => {
   const [profil, setProfil] = useState([]);
   const EndPoint = "localhost:8000/";
 
- 
+  
   const { id } = useParams();
   //Mon useEffect qui sera en charge de la connexion bidirectionnel entre le client et le serveur
   useEffect(() => {
@@ -67,6 +67,8 @@ const ChatRoom = () => {
         setUsername(response.data.message.username);
         setProfil([response.data.message]);
         setUserId(response.data.message.id);
+        localStorage.setItem("username", response.data.message.username)
+        localStorage.setItem("userId", response.data.message.id)
       });
     };
     return userId();

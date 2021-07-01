@@ -26,6 +26,7 @@ const Connect = () => {
         } else {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("isAdmin", res.data.role)
+          localStorage.setItem("userId", res.data.id )
         }
         setEmail("");
         setPassword("");

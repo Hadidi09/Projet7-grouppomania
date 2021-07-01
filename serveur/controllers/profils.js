@@ -65,9 +65,31 @@ exports.deleteUser = async (req, res, next) => {
     });
     res.json({ status: 200, userDestroy });
   } catch (error) {
-    res.json({ status: 500, message: "impossible to destroy user" });
+    res.json({ status: 400, message: "impossible to destroy user" });
   }
 };
+
+// supprimer un post 
+
+exports.deletePost = async (req, res, next) =>
+{
+  try
+  {
+    const id = req.params.id
+
+    await db.Post.destroy({
+      where: {
+        
+           id: id 
+        
+      }
+    })
+    res.json({ status: 200, message: id})
+  } catch (error)
+  {
+    res.json({ status: 400, message: "impossible to destroy Post !!" });
+  }
+}
 
 //Ajouter un message sur le mur de la page
 exports.commentaire = (req, res, next) => {
@@ -172,14 +194,6 @@ exports.AllCommentsPost = async (req, res, next) =>
   })
   res.json({status: 200, message:allComment})
 }
-//trouver un user
-// exports.findUser = async (req, res, next) =>
-// {
-//   const id = req.params.id
-//   const user = await db.user.findByPk(
-//     id);
 
-  
-//   res.json({ status: 200, message: user });
-// }
-//
+
+

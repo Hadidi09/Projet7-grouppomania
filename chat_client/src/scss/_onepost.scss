@@ -5,6 +5,7 @@
   background-color: #011f4b;
   display: flex;
   flex-direction: column;
+  align-items: center;
   .display_post_one {
     border: 2px solid black;
     background-color: #011f4b;
@@ -13,6 +14,12 @@
     }
     .post-message {
       color: #fff;
+    }
+  }
+
+  .input-message {
+    input {
+      width: 13.5rem;
     }
   }
 }

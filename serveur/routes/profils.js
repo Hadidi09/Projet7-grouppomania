@@ -24,9 +24,11 @@ router.get("/", auth, profilControllers.AllImagesPost);
 router.get("/post/:id",  auth,profilControllers.findPost)
 
 router.get("/allusers", auth, profilControllers.AllUsers)
-//router.get("/:id", auth, profilControllers.findUser)
-router.get("/allcommentspost/:id", profilControllers.AllCommentsPost)
+
+router.get("/allcommentspost/:id", auth,profilControllers.AllCommentsPost)
 
 router.delete("/profil/:id", auth, profilControllers.deleteUser);
+router.delete("/post/user/:id", auth, profilControllers.deletePost)
+
 
 module.exports = router;

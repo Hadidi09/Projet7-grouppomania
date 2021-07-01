@@ -22,14 +22,13 @@ const UsersLists = () =>
     }, [])
     return (
         <div>
-            <Table striped bordered hover variant="dark" className="tableau">
+            <Table striped bordered hover variant="secondary" className="tableau">
                 <thead>
                     <tr>
                     <th>#</th>
                     <th>Username</th>
                     <th>Email</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                    <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +39,6 @@ const UsersLists = () =>
                                 <td>{val.id}</td>
                                 <td>{val.username}</td>
                                 <td>{val.email}</td>
-                                <td><button>Update</button></td>
                                 <td><button>Delete</button></td>
                             </tr>
                         )
