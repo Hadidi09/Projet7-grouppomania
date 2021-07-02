@@ -47,7 +47,7 @@ exports.login = (req, res, next) => {
             role: resUser.role,
            
             token: jwt.sign({ id: resUser.id, role: resUser.role}, `${process.env.CLE_SECRETE}`, {
-              expiresIn: 1000,
+              expiresIn: '24h',
             }),
           });
         })

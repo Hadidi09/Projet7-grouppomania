@@ -1,19 +1,18 @@
+@import "./mixins";
+@import "./chatroom";
+
 .container_onepost {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  background-color: #011f4b;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @extend .container_chat;
   .display_post_one {
-    border: 2px solid black;
-    background-color: #011f4b;
-    .post_image {
-      color: #fff;
+    @extend .display-message;
+
+    .container_image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .post-message {
-      color: #fff;
+    .messagelist {
+      margin: 5%;
     }
   }
 
@@ -21,5 +20,11 @@
     input {
       width: 13.5rem;
     }
+  }
+}
+
+.postid {
+  .disable-link {
+    pointer-events: none;
   }
 }

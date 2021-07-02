@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Moment from "react-moment";
 import { toast } from "react-toastify";
 import { useParams } from "react-router";
 import { Container, Row, Col, Card, Button, Toast } from "react-bootstrap";
@@ -7,6 +8,7 @@ import io from "socket.io-client";
 import Footer from "../layout/Footer";
 import NavBar from "../layout/Navbar";
 import { useHistory, withRouter } from "react-router-dom";
+
 
 
 // Ma variable socket
@@ -115,15 +117,16 @@ const ChatRoom = () => {
             <div className="display-message">
               {messageList.map((val) => {
                 console.log(val);
+                
                 return (
                   <div className="containermessage" key={val.id}>
                     <p key={val.id}>
                       <span className="span-username">{val.userName}</span>{" "}
                     </p>
-
+                     
                     <div className="small-date">
                       <p className="para"> {val.message}</p>
-                      <small>{val.createdAt}</small>
+                      <small><Moment>{val.createdAt}</Moment></small>
                     </div>
                   </div>
                 );
@@ -139,7 +142,7 @@ const ChatRoom = () => {
                   setMessage(e.target.value);
                 }}
               />
-              <button onClick={sendMessage}>Envoyer</button>
+              <Button variant="secondary" onClick={sendMessage}>Envoyer</Button>
             </div>
           </Col>
           <Col xs={12} md={3}>

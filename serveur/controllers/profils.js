@@ -1,5 +1,5 @@
 const db = require("../models/");
-
+const  fs = require("fs")
 
 //trouver un utilisateur
 exports.profils = async (req, res, next) => {
@@ -77,14 +77,29 @@ exports.deletePost = async (req, res, next) =>
   {
     const id = req.params.id
 
-    await db.Post.destroy({
+    await db.Post.findOne({
       where: {
         
            id: id 
         
       }
     })
-    res.json({ status: 200, message: id})
+      .then(post =>
+      {
+        const filename = post.data.split("/uploads/")[1]
+        fs.unlink(`uploads/${filename}`, async () =>
+        {
+          await db.Post.destroy({
+            where: {
+        
+              id: id 
+           
+            }
+          })
+          res.json({ status: 200, message: id})
+        })
+    })
+    
   } catch (error)
   {
     res.json({ status: 400, message: "impossible to destroy Post !!" });

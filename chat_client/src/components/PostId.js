@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Moment from "react-moment";
 import { useParams } from "react-router";
 import axios from 'axios'
 import Footer from '../layout/Footer';
 import Navbar from '../layout/Navbar';
-import { Card, Container, Row, Col,Modal, Button } from "react-bootstrap";
+import { Card, Container, Row, Col,Modal, Button, Toast } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 const PostId = () =>
 {
@@ -99,7 +100,7 @@ const PostId = () =>
        e.preventDefault()
        
         
-         axios.delete(`http://localhost:8000/api/user/post/user/${PostId}`, {role: verifyAdmin} , {
+         axios.delete(`http://localhost:8000/api/user/post/user/${PostId}`,  {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -110,12 +111,28 @@ const PostId = () =>
       });
     }
     return (
-        <div>
+        <div className="postid"> 
             <Navbar />
            
             <Container fluid className="container_onepost">
                 <Row>
-                    <Col md={12}>
+                    <Col xs={12} md={3}>
+                            <div className="listconnections">
+                            <Toast>
+                                <Toast.Header>
+                                <img
+                                    src="https://findicons.com/files/icons/982/dellipack_2/128/people.png"
+                                    className="rounded mr-2"
+                                    alt="logo"
+                                />
+                                <strong className="mr-auto">Groupomania</strong>
+                                <small>{new Date().toLocaleString() + ""}</small>
+                                </Toast.Header>
+                                <Toast.Body>Post Room</Toast.Body>
+                            </Toast>
+                            </div>
+                    </Col>
+                    <Col xs={12} md={6}>
                         <div className="display_post_one">
                         
                             <button onClick={() => history.goBack()}>Go Back</button>
@@ -158,19 +175,22 @@ const PostId = () =>
                                 {messageList.map((val) =>
                                 {
                                     return (
-                                        <p className="post-message">{ val.userName} : {val.message }</p>
+                                        <div className="containermessage" key={val.id}>
+                                            <p key={val.id}>
+                                            <span className="span-username">{val.userName}</span>{" "}
+                                            </p>
+
+                                            <div className="small-date">
+                                            <p className="para"> {val.message}</p>
+                                            <small><Moment>{val.createdAt}</Moment></small>
+                                            </div>
+                                        </div>
                                     )
                                 })}
                             </div>
          
                         </div>
-                        
-                        
-                    </Col>
-                </Row>
-                <Row>
-                <Col md={12}>
-                    <div className="input-message">
+                        <div className="input-message">
                         <input
                             type="text"
                             value={message}
@@ -181,8 +201,10 @@ const PostId = () =>
                         />
                         <button onClick={UpdateMessage}>envoyer</button>
                     </div>
+                        
                     </Col>
                 </Row>
+                
                     
               
             </Container>

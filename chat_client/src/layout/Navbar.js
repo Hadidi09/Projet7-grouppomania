@@ -58,9 +58,9 @@ const NavBar = () => {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">
                   {/* <Nav.Link href="/" >Home</Nav.Link> */}
-                  <Nav.Link href={`/post/${id}`}>Post</Nav.Link>
-                  <Nav.Link href={`/profil/${id}`}>Profil</Nav.Link>
-                  <Nav.Link href={`/chatroom/${id}`}>Chat</Nav.Link>
+                  <Nav.Link href={`/post/${id}`} className="disable-link">Post</Nav.Link>
+                  <Nav.Link href={`/profil/${id}`} className="disable-link">Profil</Nav.Link>
+                  <Nav.Link href={`/chatroom/${id}`} className="disable-link">Chat</Nav.Link>
                   <Button variant="danger" onClick={Logout}>
                     Deconnexion
                   </Button>

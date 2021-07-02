@@ -117,14 +117,17 @@ const Post = () => {
           <Col xs={12} md={6}>
             <div className="display_post">
               {postList.map((val) => {
-                console.log(val);
+               
                 return (
                   <div className="containerimages" key={val.id}>
                     {/* <p>{val.User.username} : <img src={val.data} alt="images" /></p>  */}
-                    <Card style={{ width: "18rem" }}>
+                    <Card style={{ width: "90%" }}>
                       <Card.Img variant="top" src={val.data} alt="images" />
                       <Card.Body>
                         <Card.Title>{val.User.username}</Card.Title>
+                        <Card.Text>
+                          {val.description}
+                        </Card.Text>
                       </Card.Body>
                     </Card>
                     <button className="voir_post" onClick={() => { history.push(`/post/user/${val.id}`) }}>Voir Le post</button>
@@ -159,13 +162,13 @@ const Post = () => {
             value={description}
             name="description"
             type="text"
-            placeholder="Large text"
+            placeholder="Votre description ..."
             onChange={(e) => setDescription(e.target.value)}
           />
         </Form.Group>
         <Button className="my-2" variant="primary" type="submit">
           {" "}
-          Send Post{" "}
+          Envoyer votre Post{" "}
         </Button>
       </Form>
       <Footer />

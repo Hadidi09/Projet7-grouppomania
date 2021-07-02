@@ -3,6 +3,9 @@
     width: 100%;
     background-color: #011f4b;
     color: #fff;
+    border-radius: 50px;
+    -webkit-box-shadow: 2px 8px 3px 3px rgb(0 0 0 / 8%);
+    box-shadow: 2px 8px 3px 3px rgb(0 0 0 / 8%);
     .toast-header {
       display: flex;
       flex-direction: column;
