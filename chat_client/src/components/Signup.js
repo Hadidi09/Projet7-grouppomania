@@ -60,7 +60,7 @@ const Signup = () => {
       
       <Form>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>username</Form.Label>
+            <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"
               value={username}
